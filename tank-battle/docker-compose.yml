@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  tankbattle:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - tankbattle-data:/app/database
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
+
+volumes:
+  tankbattle-data:

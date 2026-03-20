@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>坦克大战 - TankBattle Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 登录/注册界面 -->
+        <div id="auth-screen" class="screen">
+            <div class="auth-container">
+                <h1>坦克大战</h1>
+                <h2>TankBattle Online</h2>
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">登录</button>
+                    <button class="tab-btn" data-tab="register">注册</button>
+                </div>
+                <form id="auth-form">
+                    <input type="text" id="username" placeholder="用户名" required>
+                    <input type="password" id="password" placeholder="密码" required>
+                    <button type="submit" class="btn-primary">开始游戏</button>
+                </form>
+                <p id="auth-error" class="error"></p>
+            </div>
+        </div>
+
+        <!-- 大厅界面 -->
+        <div id="lobby-screen" class="screen hidden">
+            <div class="lobby-container">
+                <header>
+                    <h1>坦克大战</h1>
+                    <div class="user-info">
+                        <span id="current-user"></span>
+                        <button id="logout-btn" class="btn-secondary">退出</button>
+                    </div>
+                </header>
+                
+                <div class="lobby-content">
+                    <div class="tank-selection">
+                        <h3>选择你的坦克</h3>
+                        <div class="tank-grid" id="tank-grid">
+                            <!-- 坦克卡片将通过JS生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="room-section">
+                        <h3>游戏房间</h3>
+                        <button id="create-room-btn" class="btn-primary">创建房间</button>
+                        <div class="room-list" id="room-list">
+                            <!-- 房间列表将通过JS生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏界面 -->
+        <div id="game-screen" class="screen hidden">
+            <canvas id="game-canvas"></canvas>
+            <div class="game-ui">
+                <div class="game-info">
+                    <div class="hp-bar">
+                        <span>生命值:</span>
+                        <div class="hp-progress">
+                            <div id="hp-fill"></div>
+                        </div>
+                        <span id="hp-text">100/100</span>
+                    </div>
+                    <div class="ammo-info">
+                        <span>弹药: <span id="ammo-type">普通</span></span>
+                    </div>
+                </div>
+                <div class="game-status">
+                    <span id="room-info"></span>
+                    <span id="player-count"></span>
+                </div>
+                <div class="controls-hint">
+                    <p>WASD/方向键: 移动 | 空格/鼠标左键: 射击 | 1-5: 切换弹药</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 排行榜 -->
+        <div id="leaderboard-screen" class="screen hidden">
+            <div class="leaderboard-container">
+                <h2>排行榜</h2>
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>玩家</th>
+                            <th>总分</th>
+                            <th>胜场</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                    </tbody>
+                </table>
+                <button id="back-btn" class="btn-secondary">返回</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
